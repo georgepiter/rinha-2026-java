@@ -1,0 +1,37 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "9999:9999"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api1
+      - api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "50MB"
+
+  api1:
+    image: ghcr.io/georgepiter/rinha-2026-java:latest
+    hostname: api1
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "150MB"
+
+  api2:
+    image: ghcr.io/georgepiter/rinha-2026-java:latest
+    hostname: api2
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "150MB"
+
+networks:
+  default:
+    driver: bridge
