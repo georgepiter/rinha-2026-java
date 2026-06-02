@@ -42,7 +42,7 @@ POST http://localhost:9999/fraud-score
 Com a stack rodando, execute os testes oficiais em outro terminal:
 
 ```bash
-cd D:\Projetos\test
+cd sua pasta\test
 k6 run smoke.js
 k6 run test.js
 ```
@@ -50,7 +50,7 @@ k6 run test.js
 O resultado fica em:
 
 ```text
-D:\Projetos\test\test\results.json
+sua pasta\test\results.json
 ```
 
 ## Resultado local
@@ -64,4 +64,3 @@ Rodada local em 2026-06-02 usando o teste oficial:
 - Failure rate: 2.29%.
 - Score final: 3652.68.
 
-Os resultados podem variar conforme Docker Desktop, CPU disponivel e processos rodando na maquina.
