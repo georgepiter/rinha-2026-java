@@ -41,16 +41,6 @@ public class Models {
         public double km_from_current;
     }
 
-    public static class FraudResponse {
-        public boolean approved;
-        public double fraud_score;
-
-        public FraudResponse(boolean approved, double fraud_score) {
-            this.approved = approved;
-            this.fraud_score = fraud_score;
-        }
-    }
-
     public static class Reference {
         public double[] vector;
         public String label;

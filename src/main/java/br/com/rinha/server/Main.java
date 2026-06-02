@@ -10,10 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class Main {
-  private static final byte[] READY =
-      "HTTP/1.1 204 No Content\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
-  private static final byte[] NOT_FOUND =
-      "HTTP/1.1 404 Not Found\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
+
+  private static final byte[] READY = "HTTP/1.1 204 No Content\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
+  private static final byte[] NOT_FOUND = "HTTP/1.1 404 Not Found\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
   private static final double DECISION_THRESHOLD = 0.127;
 
   private static final double[] W = {
@@ -25,8 +24,10 @@ public final class Main {
 
   public static void main(String[] args) throws Exception {
     ExecutorService pool = Executors.newVirtualThreadPerTaskExecutor();
+
     try (ServerSocket server = new ServerSocket(8080, 4096)) {
       server.setReuseAddress(true);
+
       while (true) {
         Socket socket = server.accept();
         socket.setTcpNoDelay(true);
