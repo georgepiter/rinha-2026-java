@@ -1,5 +1,8 @@
-src/main/java/br/com/rinha/model/Models.java
-src/main/java/br/com/rinha/vector/Vectorizer.java
-src/main/java/br/com/rinha/vector/KNN.java
-src/main/java/br/com/rinha/vector/VPTree.java
 src/main/java/br/com/rinha/server/Main.java
+src/main/java/br/com/rinha/server/RinhaHttpServer.java
+src/main/java/br/com/rinha/controller/FraudController.java
+src/main/java/br/com/rinha/service/FraudScorer.java
+src/main/java/br/com/rinha/util/DateMath.java
+src/main/java/br/com/rinha/util/FastJson.java
+src/main/java/br/com/rinha/util/HttpRequestReader.java
+src/main/java/br/com/rinha/util/NumberFormatter.java
