@@ -1,0 +1,8 @@
+.git
+.idea
+out
+data
+lib
+*.iml
+test
+README.md
