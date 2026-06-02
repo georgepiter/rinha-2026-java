@@ -62,7 +62,8 @@ public final class FraudScorer {
         int knownMerchants = body.indexOf("\"known_merchants\"");
         int merchant = body.indexOf("\"merchant\"");
         if (knownMerchants < 0 || merchant < 0 || knownMerchants > merchant || merchantId.isEmpty()) return true;
-        return !body.substring(knownMerchants, merchant).contains(merchantId);
+        int pos = body.indexOf(merchantId, knownMerchants);
+        return pos < 0 || pos >= merchant;
     }
 
     private static double mccRisk(String mcc) {

@@ -1,8 +1,6 @@
 package br.com.rinha.util;
 
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 
 public final class HttpRequestReader {
 
@@ -47,13 +45,31 @@ public final class HttpRequestReader {
     }
 
     private static int contentLength(byte[] bytes, int bodyStart) {
-        String headers = new String(bytes, 0, bodyStart, StandardCharsets.US_ASCII).toLowerCase(Locale.ROOT);
-        int pos = headers.indexOf("content-length:");
+        int pos = indexOfHeader(bytes, bodyStart, "content-length:");
         if (pos < 0) return 0;
         pos += "content-length:".length();
-        while (pos < headers.length() && headers.charAt(pos) == ' ') pos++;
-        int end = pos;
-        while (end < headers.length() && Character.isDigit(headers.charAt(end))) end++;
-        return Integer.parseInt(headers.substring(pos, end));
+        while (pos < bodyStart && bytes[pos] == ' ') pos++;
+
+        int value = 0;
+        while (pos < bodyStart) {
+            byte b = bytes[pos++];
+            if (b < '0' || b > '9') break;
+            value = value * 10 + (b - '0');
+        }
+        return value;
+    }
+
+    private static int indexOfHeader(byte[] bytes, int size, String needle) {
+        int last = size - needle.length();
+        for (int i = 0; i <= last; i++) {
+            int j = 0;
+            while (j < needle.length() && lower(bytes[i + j]) == needle.charAt(j)) j++;
+            if (j == needle.length()) return i;
+        }
+        return -1;
+    }
+
+    private static char lower(byte b) {
+        return b >= 'A' && b <= 'Z' ? (char) (b + 32) : (char) b;
     }
 }

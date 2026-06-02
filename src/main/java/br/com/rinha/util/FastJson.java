@@ -11,19 +11,38 @@ public final class FastJson {
         pos += key.length();
 
         while (pos < source.length() && isSeparator(source.charAt(pos))) pos++;
+        if (pos >= source.length()) return fallback;
 
-        int end = pos;
-        while (end < source.length()) {
-            char c = source.charAt(end);
-            if (!(c == '-' || c == '+' || c == '.' || c == 'e' || c == 'E' || (c >= '0' && c <= '9'))) break;
-            end++;
+        double sign = 1.0;
+        if (source.charAt(pos) == '-') {
+            sign = -1.0;
+            pos++;
         }
 
-        try {
-            return Double.parseDouble(source.substring(pos, end));
-        } catch (Exception ignored) {
-            return fallback;
+        double value = 0.0;
+        boolean found = false;
+        while (pos < source.length()) {
+            char c = source.charAt(pos);
+            if (c < '0' || c > '9') break;
+            value = value * 10.0 + c - '0';
+            pos++;
+            found = true;
         }
+
+        if (pos < source.length() && source.charAt(pos) == '.') {
+            pos++;
+            double factor = 0.1;
+            while (pos < source.length()) {
+                char c = source.charAt(pos);
+                if (c < '0' || c > '9') break;
+                value += (c - '0') * factor;
+                factor *= 0.1;
+                pos++;
+                found = true;
+            }
+        }
+
+        return found ? value * sign : fallback;
     }
 
     public static boolean bool(String source, String key) {

@@ -26,9 +26,9 @@ public final class DateMath {
 
     private static int daysFromIso(String iso) {
         if (iso.length() < 10) return 0;
-        int y = Integer.parseInt(iso.substring(0, 4));
-        int m = Integer.parseInt(iso.substring(5, 7));
-        int d = Integer.parseInt(iso.substring(8, 10));
+        int y = (iso.charAt(0) - '0') * 1000 + (iso.charAt(1) - '0') * 100 + (iso.charAt(2) - '0') * 10 + iso.charAt(3) - '0';
+        int m = (iso.charAt(5) - '0') * 10 + iso.charAt(6) - '0';
+        int d = (iso.charAt(8) - '0') * 10 + iso.charAt(9) - '0';
         y -= m <= 2 ? 1 : 0;
         int era = Math.floorDiv(y, 400);
         int yoe = y - era * 400;
