@@ -15,7 +15,7 @@ services:
           memory: "50MB"
 
   api1:
-    image: ghcr.io/georgepiter/rinha-2026-java:tuned-a3be1dc
+    image: ghcr.io/georgepiter/rinha-2026-java:balanced-4c876da
     hostname: api1
     deploy:
       resources:
@@ -24,7 +24,7 @@ services:
           memory: "150MB"
 
   api2:
-    image: ghcr.io/georgepiter/rinha-2026-java:tuned-a3be1dc
+    image: ghcr.io/georgepiter/rinha-2026-java:balanced-4c876da
     hostname: api2
     deploy:
       resources:
