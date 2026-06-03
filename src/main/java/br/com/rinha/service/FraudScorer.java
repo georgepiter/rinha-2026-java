@@ -29,10 +29,11 @@ public final class FraudScorer {
         double merchantAvg = FastJson.number(body, "\"avg_amount\"", 0, merchantStart);
         boolean hasLast = !body.contains("\"last_transaction\":null") && !lastTs.isEmpty();
 
+        double safeCustomerAvg = customerAvg > 0 ? customerAvg : 0.01;
         double z = W[0];
         z += W[1] * clamp(amount / 10000.0);
         z += W[2] * clamp(installments / 12.0);
-        z += W[3] * clamp((amount / (customerAvg > 0 ? customerAvg : 0.01)) / 10.0);
+        z += W[3] * clamp((amount / safeCustomerAvg) / 10.0);
         z += W[4] * (DateMath.isoHour(requestedAt) / 23.0);
         z += W[5] * (DateMath.mondayBasedDow(requestedAt) / 6.0);
         z += W[6] * (hasLast ? clamp(DateMath.minutesDelta(requestedAt, lastTs) / 1440.0) : -1.0);
@@ -45,7 +46,7 @@ public final class FraudScorer {
         z += W[13] * mccRisk(mcc);
         z += W[14] * clamp(merchantAvg / 10000.0);
         z += W[15] * (hasLast ? 1.0 : 0.0);
-        z += W[16] * (Math.log1p(amount / (customerAvg > 0 ? customerAvg : 0.01)) / Math.log(101.0));
+        z += W[16] * (Math.log1p(amount / safeCustomerAvg) / Math.log(101.0));
         z += W[17] * (Math.log1p(kmHome) / Math.log(1001.0));
         z += W[18] * (Math.log1p(kmLast) / Math.log(1001.0));
 

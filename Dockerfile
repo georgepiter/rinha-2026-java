@@ -9,4 +9,4 @@ WORKDIR /app
 COPY --from=build /app/bin ./bin
 EXPOSE 8080
 
-CMD ["java", "-Xms16m", "-Xmx64m", "-XX:+UseSerialGC", "-XX:MaxRAMPercentage=75", "-cp", "bin", "br.com.rinha.server.Main"]
+CMD ["java", "-Xms96m", "-Xmx96m", "-XX:+UnlockExperimentalVMOptions", "-XX:+UseEpsilonGC", "-XX:ActiveProcessorCount=1", "-cp", "bin", "br.com.rinha.server.Main"]

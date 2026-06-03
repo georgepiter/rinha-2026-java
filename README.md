@@ -89,10 +89,10 @@ Rodada local em 2026-06-03 usando o teste oficial:
 
 - Smoke oficial: 100% dos checks, 0 erro HTTP.
 - Teste completo: 54.100 requisicoes processadas, 0 erro HTTP.
-- p99: 1.24 ms.
+- p99: 1.09 ms.
 - Falsos positivos: 1238.
 - Falsos negativos: 1.
 - Falhas ponderadas: 1241.
 - Failure rate: 2.29%.
-- Score final: 3616.69.
+- Score final: 3672.66.
 
