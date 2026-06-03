@@ -69,7 +69,7 @@ Isso evita cache de `latest` durante a previa oficial.
 Imagem atual da submissao:
 
 ```text
-ghcr.io/georgepiter/rinha-2026-java:balanced-4c876da
+ghcr.io/georgepiter/rinha-2026-java:epsilon-e1cac0d
 ```
 
 Fluxo usado para publicar uma nova versao:
@@ -95,4 +95,17 @@ Rodada local em 2026-06-03 usando o teste oficial:
 - Falhas ponderadas: 1241.
 - Failure rate: 2.29%.
 - Score final: 3672.66.
+
+## Resultado oficial
+
+Previa oficial com a imagem `ghcr.io/georgepiter/rinha-2026-java:epsilon-e1cac0d`:
+
+- Commit da branch `submission`: `ada8fef`.
+- Teste completo: 54.100 requisicoes processadas, 0 erro HTTP.
+- p99: 46.1999278 ms.
+- Falsos positivos: 1246.
+- Falsos negativos: 85.
+- Falhas ponderadas: 1501.
+- Failure rate: 2.4621%.
+- Score final: 1938.8450388275019.
 
