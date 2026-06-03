@@ -11,7 +11,7 @@ public final class FraudController {
 
     private static final byte[] READY = "HTTP/1.1 204 No Content\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
     private static final byte[] NOT_FOUND = "HTTP/1.1 404 Not Found\r\n\r\n".getBytes(StandardCharsets.US_ASCII);
-    private static final double DECISION_THRESHOLD = 0.07;
+    private static final double DECISION_THRESHOLD = 0.127;
 
     private final FraudScorer scorer = new FraudScorer();
 
