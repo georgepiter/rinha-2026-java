@@ -6,7 +6,11 @@ public final class FastJson {
     }
 
     public static double number(String source, String key, double fallback) {
-        int pos = source.indexOf(key);
+        return number(source, key, fallback, 0);
+    }
+
+    public static double number(String source, String key, double fallback, int fromIndex) {
+        int pos = source.indexOf(key, fromIndex);
         if (pos < 0) return fallback;
         pos += key.length();
 
@@ -55,7 +59,11 @@ public final class FastJson {
     }
 
     public static String string(String source, String key, String fallback) {
-        int pos = source.indexOf(key);
+        return string(source, key, fallback, 0);
+    }
+
+    public static String string(String source, String key, String fallback, int fromIndex) {
+        int pos = source.indexOf(key, fromIndex);
         if (pos < 0) return fallback;
         pos += key.length();
 

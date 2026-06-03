@@ -16,9 +16,9 @@ public final class FraudScorer {
         String requestedAt = FastJson.string(body, "\"requested_at\"", "");
         String lastTs = FastJson.string(body, "\"timestamp\"", "");
         int merchantPos = body.indexOf("\"merchant\"");
-        String merchantObj = merchantPos >= 0 ? body.substring(merchantPos) : "";
-        String merchantId = FastJson.string(merchantObj, "\"id\"", "");
-        String mcc = FastJson.string(merchantObj, "\"mcc\"", "");
+        int merchantStart = merchantPos >= 0 ? merchantPos : body.length();
+        String merchantId = FastJson.string(body, "\"id\"", "", merchantStart);
+        String mcc = FastJson.string(body, "\"mcc\"", "", merchantStart);
 
         double amount = FastJson.number(body, "\"amount\"", 0);
         double installments = FastJson.number(body, "\"installments\"", 0);
@@ -26,7 +26,7 @@ public final class FraudScorer {
         double txCount = FastJson.number(body, "\"tx_count_24h\"", 0);
         double kmHome = FastJson.number(body, "\"km_from_home\"", 0);
         double kmLast = FastJson.number(body, "\"km_from_current\"", 0);
-        double merchantAvg = FastJson.number(merchantObj, "\"avg_amount\"", 0);
+        double merchantAvg = FastJson.number(body, "\"avg_amount\"", 0, merchantStart);
         boolean hasLast = !body.contains("\"last_transaction\":null") && !lastTs.isEmpty();
 
         double z = W[0];
